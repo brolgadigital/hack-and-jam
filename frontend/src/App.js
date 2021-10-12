@@ -1,5 +1,6 @@
 import React from 'react'
 import Navigation from './components/Navigation'
+import Footer from './components/Footer'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Activity from './screens/Activity'
 import Browse from './screens/Browse'
@@ -7,7 +8,7 @@ import Forum from './screens/Forum'
 import Jams from './screens/Jams'
 import { AuthProvider } from './context/UserAuth'
 
-// const UserAuth = React.createContext(false)
+import './App.scss'
 
 function App() {
     //Check Authorisation & set state context
@@ -37,6 +38,8 @@ function App() {
                         <Browse />
                     </Route>
                 </Switch>
+
+                <Footer />
 
             </Router>
         </div>

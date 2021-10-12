@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserAuth from '../context/UserAuth'
 
-import logo from '../haj-logo-white.png'
+import logo from '../assets/haj-logo-white.png'
 
 import '../styles/navigation.scss'
 
