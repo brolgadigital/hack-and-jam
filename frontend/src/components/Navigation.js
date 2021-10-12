@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import logo from '../haj-logo-white.png'
 
@@ -8,13 +9,12 @@ const Navigation = () => {
     return (
         <nav>
             <div className='wrapper'>
-                
                 <ul className='page-links'>
-                    <li><a><img src={logo} /></a></li>
-                    <li><a>Browse</a></li>
-                    <li><a>Jams</a></li>
-                    <li><a>Activity</a></li>
-                    <li><a>Chat</a></li>
+                    <li><Link to='/'><img src={logo} /></Link></li>
+                    <li><Link to='/browse'>Browse</Link></li>
+                    <li><Link to='/jams'>Jams</Link></li>
+                    <li><Link to='/activity'>Activity</Link></li>
+                    <li><Link to='/forum'>Chat</Link></li>
                 </ul>
                 <ul className='user-links'>
                     <li><a>Notifications</a></li>
