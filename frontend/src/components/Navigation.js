@@ -7,8 +7,6 @@ import logo from '../assets/haj-logo-white.png'
 
 import '../styles/navigation.scss'
 
-
-
 const Navigation = () => {
     const auth = useContext(UserAuth)
     
@@ -37,7 +35,6 @@ const UserNav = () => {
         e.preventDefault()
         const response = await fetch('http://localhost:5000/auth/logout', {
             method: 'DELETE',
-            // body: JSON.stringify(user),
             headers: {
                 'Content-type': 'application/json',
             },

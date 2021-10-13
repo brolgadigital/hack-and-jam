@@ -2,8 +2,6 @@ import React, { useState, useContext } from 'react'
 import UserAuth from '../../context/UserAuth'
 
 const LogIn = () => {
-    // let auth = useContext(UserAuth)
-    // const [auth, setAuth] = useState()
     const { auth, setAuth } = useContext(UserAuth)
 
     const [ user, setUser ] = useState({
@@ -25,7 +23,6 @@ const LogIn = () => {
             console.log(response)
             const data = await response.json()
             setAuth(data.auth)
-            // auth = data.auth
         }
     }
 

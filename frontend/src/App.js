@@ -11,10 +11,7 @@ import { AuthProvider } from './context/UserAuth'
 import './App.scss'
 
 function App() {
-    //Check Authorisation & set state context
-    // const auth = UserAuth
-    const [auth, setAuth] = useState({}) //should probs use useEffect to check authorisation once when app first loads
-    // const { auth, setAuth } = useContext(UserAuth)
+    const [auth, setAuth] = useState({})
 
     const checkAuth = async () => {
         const response = await fetch('http://localhost:5000/auth/login', {
