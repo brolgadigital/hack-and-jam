@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserAuth from '../context/UserAuth'
+import GuestNav from './GuestNav'
 
 import logo from '../assets/haj-logo-white.png'
 
@@ -35,15 +36,6 @@ const UserNav = () => {
             <li><a href='/'>Notifications</a></li>
             <li><a href='/'>User</a></li>
             <li><a href='/'>Options</a></li>
-        </ul>
-    )
-}
-
-const GuestNav = () => {
-    return (
-        <ul className='user-links'>
-            <li><a href='/'>Sign Up</a></li>
-            <li><a href='/'>Log In</a></li>
         </ul>
     )
 }

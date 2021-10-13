@@ -12,7 +12,7 @@ import './App.scss'
 
 function App() {
     //Check Authorisation & set state context
-    const auth = {auth:true}
+    const auth = {auth:false}
 
     return (
         <div className='App'>
