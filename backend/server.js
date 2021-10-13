@@ -27,4 +27,4 @@ db.connection((error) => {
     }
 })
 
-// app.use('/auth', require('./routes/auth'))
+app.use('/auth', require('./routes/auth'))

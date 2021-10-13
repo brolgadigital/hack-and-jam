@@ -31,11 +31,27 @@ const Navigation = () => {
 export default Navigation
 
 const UserNav = () => {
+    const { auth, setAuth } = useContext(UserAuth)
+
+    const logOut = async (e) => {
+        e.preventDefault()
+        const response = await fetch('http://localhost:5000/auth/logout', {
+            method: 'DELETE',
+            // body: JSON.stringify(user),
+            headers: {
+                'Content-type': 'application/json',
+            },
+            credentials: 'include'
+        })
+        const data = await response.json()
+        setAuth(data.auth)
+    }
+
     return (
         <ul className='user-links'>
             <li><a href='/'>Notifications</a></li>
             <li><a href='/'>User</a></li>
-            <li><a href='/'>Options</a></li>
+            <li><a href='/' onClick={logOut}>Log Out</a></li>
         </ul>
     )
 }

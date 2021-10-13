@@ -47,8 +47,8 @@ const User = db.sequelize.define('user', {
     }
 })
   
-User.sync({alter: true}).then(() => {
-    console.log('table updated');
-})
+// User.sync({alter: true}).then(() => {
+//     console.log('table updated');
+// })
 
 module.exports = User;

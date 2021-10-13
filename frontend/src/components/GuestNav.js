@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactModal from 'react-modal'
-// import LogIn from './auth/LogIn'
-// import SignUp from './auth/SignUp'
+import LogIn from './forms/LogIn'
+import SignUp from './forms/SignUp'
 
 const modalStyles = {
     overlay: { //exterior styles
@@ -55,7 +55,7 @@ const GuestNav = () => {
                 style={modalStyles}
                 contentLabel="Log In"
             >
-                <h2>Log In Form</h2>
+                <LogIn />
             </ReactModal>
 
             <ReactModal
@@ -65,7 +65,7 @@ const GuestNav = () => {
                 style={modalStyles}
                 contentLabel="Log In"
             >
-                <h2>Sign Up Form</h2>
+                <SignUp />
             </ReactModal>
         </>
     )
