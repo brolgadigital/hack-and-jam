@@ -4,11 +4,13 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const session = require('express-session')
 const db = require('../connection')
+const cookieParser = require('cookie-parser')
 
 // Load User model
 const User = require('../models/User');
 
 // router.use(cors())
+router.use(cookieParser())
 router.use(express.json())
 router.use(express.urlencoded({
   extended: true
@@ -29,15 +31,21 @@ localConfig(
 )
 
 router.get('/', checkAuthenticated, (req, res) => {
-    res.send({auth:true})
+    // if (err) {
+    //     console.log(err);
+    //     res.sendStatus(500);
+    //     return;
+    // }
+    const usr = req.user
+    res.send({auth: true, usr: usr[0].username})
 })
 
-router.get('/login', checkNotAuthenticated, (req, res) => {
-    res.send({auth: false, redirect: ''})
-})
+// router.get('/login', checkNotAuthenticated, (req, res) => {
+//     res.send({auth: false, redirect: ''})
+// })
 
 router.post('/login', checkNotAuthenticated, passport.authenticate('local'), (req, res) => {
-    res.send({auth: true, redirect: '/'})
+    res.send({auth: true, usr: req.body.username})
 })
 
 router.get('/register', checkNotAuthenticated, (req, res) => {
@@ -65,14 +73,14 @@ router.delete('/logout', (req, res) => {
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return next()
+        next()
     }
-    res.send({auth: false, redirect: '/login'})
+    res.send({auth: false})
 }
 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        res.send({auth: true, redirect: '/'})
+        res.send({auth: true})
     }
     next()
 }

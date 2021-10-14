@@ -22,7 +22,7 @@ const SignUp = () => {
 
             const data = await response.json()
             console.log(data)
-            // setAuth({auth: data.auth, url: data.redirect})
+            //load log in modal
         }
     }
 

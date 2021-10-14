@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React from 'react'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -11,31 +11,10 @@ import { AuthProvider } from './context/UserAuth'
 import './App.scss'
 
 function App() {
-    const [auth, setAuth] = useState({})
-
-    const checkAuth = async () => {
-        const response = await fetch('http://localhost:5000/auth/login', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json()
-        setAuth(data.auth)
-    }
-
-    useEffect(() => {checkAuth()}, [])
-
-    const userAuth = useMemo(
-        () => ({ auth, setAuth }), 
-        [auth]
-    )
-
     return (
         <div className='App'>
             <Router>
-                <AuthProvider value={userAuth}>
+                <AuthProvider>
                     <Navigation />
                 </AuthProvider>
 

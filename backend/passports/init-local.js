@@ -22,8 +22,9 @@ const localConfig = (passport, getUserByUN, getUserById) => {
     passport.serializeUser((user, done) => {
         return done(null, user.uid)
     })
-    passport.deserializeUser((id, done) => {
-        return done(null, getUserById(id))
+    passport.deserializeUser(async (id, done) => {
+        user = await getUserById(id)
+        return done(null, user)
     })
 }
 

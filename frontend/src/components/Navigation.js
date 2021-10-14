@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import UserAuth from '../context/UserAuth'
+import { UserAuth } from '../context/UserAuth'
 import GuestNav from './GuestNav'
 
 import logo from '../assets/haj-logo-white.png'
@@ -8,19 +8,36 @@ import logo from '../assets/haj-logo-white.png'
 import '../styles/navigation.scss'
 
 const Navigation = () => {
-    const auth = useContext(UserAuth)
-    
+    const [state, setState] = useContext(UserAuth)
+
+    const checkAuth = async () => {
+        const response = await fetch('http://localhost:5000/auth/', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json()
+        setState(state => ({...state, auth:data.auth, usr: data.usr}))
+    }
+
+    useEffect(() => {
+        checkAuth()
+        // eslint-disable-next-line
+    }, [])
+
     return (
         <nav>
             <div className='wrapper'>
                 <ul className='page-links'>
-                    <li><Link to='/'><img src={logo} alt='Hack and Jam'/></Link></li>
+                    <li><Link to='/'><img src={ logo } alt='Hack and Jam'/></Link></li>
                     <li><Link to='/browse'>Browse</Link></li>
                     <li><Link to='/jams'>Jams</Link></li>
                     <li><Link to='/activity'>Activity</Link></li>
                     <li><Link to='/forum'>Chat</Link></li>
                 </ul>
-                {auth.auth ? <UserNav /> : <GuestNav />}
+                { state.auth ? <UserNav /> : <GuestNav /> }
             </div>
         </nav>
     )
@@ -29,7 +46,7 @@ const Navigation = () => {
 export default Navigation
 
 const UserNav = () => {
-    const { auth, setAuth } = useContext(UserAuth)
+    const [state, setState] = useContext(UserAuth)
 
     const logOut = async (e) => {
         e.preventDefault()
@@ -41,13 +58,13 @@ const UserNav = () => {
             credentials: 'include'
         })
         const data = await response.json()
-        setAuth(data.auth)
+        setState(state => ({...state, auth:data.auth, usr: data.usr}))
     }
 
     return (
         <ul className='user-links'>
             <li><a href='/'>Notifications</a></li>
-            <li><a href='/'>User</a></li>
+            <li><a href='/'>{ state.usr }</a></li>
             <li><a href='/' onClick={logOut}>Log Out</a></li>
         </ul>
     )

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
-import UserAuth from '../../context/UserAuth'
+import { UserAuth } from '../../context/UserAuth'
 
 const LogIn = () => {
-    const { auth, setAuth } = useContext(UserAuth)
+    const [ state, setState ] = useContext(UserAuth)
 
     const [ user, setUser ] = useState({
         username: '',
@@ -14,15 +14,15 @@ const LogIn = () => {
         if(user.username && user.password){
             const response = await fetch('http://localhost:5000/auth/login', {
                 method: 'POST',
-                body: JSON.stringify(user),
                 headers: {
                     'Content-type': 'application/json',
                 },
-                credentials: 'include'
+                credentials: 'include',
+                body: JSON.stringify(user)
             })
-            console.log(response)
+            
             const data = await response.json()
-            setAuth(data.auth)
+            setState(state => ({...state, auth:data.auth, usr: data.usr}))
         }
     }
 
